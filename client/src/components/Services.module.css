@@ -1,0 +1,188 @@
+/* Premium Services Section Styling */
+.services {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.services::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 20s ease-in-out infinite;
+}
+
+.services::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(240, 147, 251, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(30px);
+  }
+}
+
+.servicesContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.heading {
+  font-size: 2.8rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInDown 0.8s ease-out;
+  letter-spacing: -0.5px;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+.card {
+  text-align: center;
+  animation: fadeInUp 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+.card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.cardContent {
+  padding: 40px 30px;
+  border-radius: 16px;
+  margin-bottom: 0;
+  backdrop-filter: blur(10px);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.cardContent::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  transition: all 0.5s ease;
+}
+
+.card:hover .cardContent {
+  transform: translateY(-15px) scale(1.05);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.card:hover .cardContent::before {
+  top: -30%;
+  right: -30%;
+}
+
+.aiDiagnosis {
+  background: linear-gradient(135deg, rgba(219, 234, 254, 0.8) 0%, rgba(147, 197, 253, 0.6) 100%);
+  border-top: 3px solid #2563eb;
+}
+
+.healthMonitoring {
+  background: linear-gradient(135deg, rgba(209, 250, 229, 0.8) 0%, rgba(167, 243, 208, 0.6) 100%);
+  border-top: 3px solid #10b981;
+}
+
+.personalizedCare {
+  background: linear-gradient(135deg, rgba(237, 233, 254, 0.8) 0%, rgba(216, 180, 254, 0.6) 100%);
+  border-top: 3px solid #a855f7;
+}
+
+.cardTitle {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+
+.card:hover .cardTitle {
+  transform: scale(1.1);
+}
+
+.card p {
+  color: #4b5563;
+  line-height: 1.7;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.card:hover p {
+  color: #1a202c;
+}
+
+@media (max-width: 768px) {
+  .services {
+    padding: 60px 0;
+  }
+
+  .heading {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+
+  .grid {
+    gap: 24px;
+  }
+
+  .cardContent {
+    padding: 30px 20px;
+  }
+}

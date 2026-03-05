@@ -1,0 +1,195 @@
+/* Premium Hero Section Styling */
+.hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 400% 400%;
+  color: #ffffff;
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  animation: wave 15s linear infinite;
+}
+
+@keyframes wave {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1440px 0;
+  }
+}
+
+.heroContent {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 24px;
+  line-height: 1.2;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: titleSlide 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+  letter-spacing: -1px;
+}
+
+@keyframes titleSlide {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.subtitle {
+  font-size: 1.4rem;
+  margin-bottom: 48px;
+  opacity: 0.95;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
+
+.buttons {
+  display: inline-flex;
+  gap: 20px;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.buttonPrimary,
+.buttonSecondary {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+}
+
+.buttonPrimary::before,
+.buttonSecondary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: -1;
+}
+
+.buttonPrimary {
+  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+  color: #667eea;
+  padding: 14px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.buttonPrimary:hover::before,
+.buttonSecondary:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.buttonPrimary:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  color: #764ba2;
+}
+
+.buttonPrimary:active {
+  transform: translateY(-2px);
+}
+
+.buttonSecondary {
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: #ffffff;
+  padding: 12px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.buttonSecondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.buttonSecondary:active {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 80px 0;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
