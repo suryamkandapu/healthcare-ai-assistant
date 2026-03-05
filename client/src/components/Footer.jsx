@@ -15,7 +15,9 @@ const Footer = () => {
             <ul style={{ lineHeight: '1.75' }}>
               <li><a href="#home" className={styles.footerLink}>Home</a></li>
               <li><a href="#services" className={styles.footerLink}>Services</a></li>
+              <li><a href="#symptom-checker" className={styles.footerLink}>Symptom Checker</a></li>
               <li><a href="#booking" className={styles.footerLink}>Book Appointment</a></li>
+              <li><a href="#medicine-reminders" className={styles.footerLink}>Medicine Reminders</a></li>
             </ul>
           </div>
           <div>

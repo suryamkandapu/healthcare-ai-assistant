@@ -8,12 +8,63 @@ const Booking = () => {
   const [time, setTime] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [reason, setReason] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [appointments, setAppointments] = useState([]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Appointment booked for ${date.toDateString()} at ${time} for ${name}`);
-    // Here you can integrate with backend to save the appointment
+  const suggestedSlots = ['9:00 AM', '10:30 AM', '3:00 PM', '5:30 PM'];
+
+  const fetchAppointments = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/appointments');
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        setAppointments(data);
+      }
+    } catch {
+      // ignore initial fetch errors
+    }
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!time) return;
+
+    setSubmitting(true);
+    try {
+      const response = await fetch('http://localhost:3001/api/appointments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          date: date.toISOString(),
+          time,
+          reason,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to book appointment');
+      }
+
+      await fetchAppointments();
+      alert(`Appointment booked for ${date.toDateString()} at ${time} for ${name}`);
+      setTime('');
+      setReason('');
+    } catch (err) {
+      alert(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchAppointments();
+  }, []);
 
   return (
     <section id="booking" className={styles.booking}>
@@ -23,6 +74,23 @@ const Booking = () => {
           <div>
             <h3 className={styles.heading}>Select Date</h3>
             <Calendar onChange={setDate} value={date} />
+            <div style={{ marginTop: '16px' }}>
+              <h4 className={styles.heading} style={{ fontSize: '1.05rem' }}>
+                AI Suggested Slots
+              </h4>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '8px' }}>
+                {suggestedSlots.map((slot) => (
+                  <button
+                    key={slot}
+                    type="button"
+                    className={styles.suggestedSlot}
+                    onClick={() => setTime(slot)}
+                  >
+                    {slot}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
           <div>
             <h3 className={styles.heading}>Appointment Details</h3>
@@ -64,13 +132,45 @@ const Booking = () => {
                   <option value="4:00 PM">4:00 PM</option>
                 </select>
               </div>
+              <div>
+                <label className={styles.inputLabel}>Reason (optional)</label>
+                <input
+                  type="text"
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
+                  className={styles.inputField}
+                  placeholder="Check-up, chest pain, follow-up..."
+                />
+              </div>
               <button
                 type="submit"
                 className={styles.button}
+                disabled={submitting}
               >
-                Book Appointment
+                {submitting ? 'Booking...' : 'Book Appointment'}
               </button>
             </form>
+            {appointments.length > 0 && (
+              <div style={{ marginTop: '24px' }}>
+                <h4 className={styles.heading} style={{ fontSize: '1.05rem' }}>
+                  Upcoming Appointments
+                </h4>
+                <ul
+                  style={{
+                    listStyle: 'none',
+                    padding: 0,
+                    marginTop: '8px',
+                    lineHeight: '1.6',
+                  }}
+                >
+                  {appointments.map((appt) => (
+                    <li key={appt.id} style={{ color: '#fff', opacity: 0.9 }}>
+                      {new Date(appt.date).toDateString()} • {appt.time} • {appt.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>

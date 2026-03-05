@@ -11,7 +11,9 @@ const Navigation = () => {
         <div className={styles.links}>
           <a href="#home" className={styles.link}>Home</a>
           <a href="#services" className={styles.link}>Services</a>
+          <a href="#symptom-checker" className={styles.link}>Symptom Checker</a>
           <a href="#booking" className={styles.link}>Book Appointment</a>
+          <a href="#medicine-reminders" className={styles.link}>Reminders</a>
           <a href="tel:+1234567890" className={styles.callButton}>Call Now</a>
         </div>
       </div>
