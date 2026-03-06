@@ -1,0 +1,127 @@
+/* Premium Dashboard Styling */
+.dashboard {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 25s ease-in-out infinite;
+}
+
+.dashboard::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(240, 147, 251, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 30s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(40px);
+  }
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header h1 {
+  font-size: 3.2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 12px 0;
+  letter-spacing: -1px;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: #64748b;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.tabsContainer {
+  margin-bottom: 50px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tabsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.tabButton {
+  padding: 14px 16px;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #4b5563;
+  position: relative;\n  overflow: hidden;\n}\n\n.tabButton::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: -100%;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n  transition: left 0.4s ease;\n  z-index: -1;\n  border-radius: 14px;\n}\n\n.tabButton:hover::before {\n  left: 0;\n}\n\n.tabButton:hover {\n  transform: translateY(-4px);\n  color: #ffffff;\n  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);\n}\n\n.tabButton.active {\n  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n  color: #ffffff;\n  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);\n  transform: translateY(-4px) scale(1.05);\n  border-color: rgba(255, 255, 255, 0.3);\n}\n\n.tabButton.active::before {\n  background: transparent;\n}\n\n.tabIcon {\n  font-size: 1.8rem;\n  animation: iconBounce 0.6s ease-out;\n}\n\n@keyframes iconBounce {\n  0% {\n    transform: scale(0.3) rotate(-45deg);\n    opacity: 0;\n  }\n  50% {\n    transform: scale(1.2);\n  }\n  100% {\n    transform: scale(1) rotate(0deg);\n    opacity: 1;\n  }\n}\n\n.tabLabel {\n  font-size: 0.8rem;\n  text-align: center;\n  letter-spacing: 0.2px;\n}\n\n.contentArea {\n  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 255, 0.95) 100%);\n  border-radius: 24px;\n  padding: 40px;\n  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.12);\n  border: 1px solid rgba(255, 255, 255, 0.6);\n  animation: contentSlide 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);\n  min-height: 500px;\n}\n\n@keyframes contentSlide {\n  from {\n    opacity: 0;\n    transform: translateY(30px) scale(0.95);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0) scale(1);\n  }\n}\n\n@media (max-width: 1200px) {\n  .tabsList {\n    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));\n    gap: 8px;\n    padding: 12px;\n  }\n\n  .tabButton {\n    padding: 12px 10px;\n    font-size: 0.75rem;\n  }\n}\n\n@media (max-width: 768px) {\n  .dashboard {\n    padding: 60px 0;\n  }\n\n  .header h1 {\n    font-size: 2.2rem;\n  }\n\n  .header p {\n    font-size: 1rem;\n  }\n\n  .tabsList {\n    grid-template-columns: repeat(2, 1fr);\n  }\n\n  .contentArea {\n    padding: 24px;\n    min-height: auto;\n  }\n}\n\n@media (max-width: 480px) {\n  .header h1 {\n    font-size: 1.8rem;\n  }\n\n  .tabsList {\n    grid-template-columns: 1fr;\n  }\n\n  .tabButton {\n    flex-direction: row;\n    justify-content: flex-start;\n  }\n\n  .contentArea {\n    padding: 16px;\n  }\n}\n

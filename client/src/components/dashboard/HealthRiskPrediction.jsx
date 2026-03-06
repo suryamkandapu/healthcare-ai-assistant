@@ -1,0 +1,24 @@
+import React, { useState } from 'react';
+import styles from './features.module.css';
+
+const HealthRiskPrediction = () => {
+  const [formData, setFormData] = useState({
+    age: '',
+    weight: '',
+    bp: '',
+    sugar: '',
+  });
+  const [risk, setRisk] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handlePredict = async () => {
+    if (!formData.age || !formData.weight || !formData.bp || !formData.sugar) return;
+    setLoading(true);
+
+    setTimeout(() => {
+      const age = parseInt(formData.age);\n      const risks = age > 50 ? 'High' : age > 35 ? 'Medium' : 'Low';\n\n      setRisk({\n        diabetesRisk: parseInt(formData.sugar) > 120 ? 'HIGH' : 'LOW',\n        heartDiseaseRisk: parseInt(formData.bp) > 140 ? 'HIGH' : 'MEDIUM',\n        overallRisk: risks,\n        recommendations: [\n          'Exercise for 30 minutes daily',\n          'Follow a balanced diet',\n          'Reduce salt intake',\n          'Regular health checkups',\n          'Manage stress levels',\n        ],\n      });\n      setLoading(false);\n    }, 1500);\n  };\n\n  const getRiskColor = (riskLevel) => {\n    if (riskLevel === 'HIGH') return '#ef4444';\n    if (riskLevel === 'MEDIUM') return '#f59e0b';\n    return '#10b981';\n  };\n\n  return (\n    <div className={styles.featureContainer}>\n      <h2>❤️ AI Health Risk Prediction</h2>\n      <p>Get personalized health risk assessment based on your vitals</p>\n\n      <div className={styles.riskForm}>\n        <div className={styles.formGrid}>\n          <div className={styles.formGroup}>\n            <label>Age (years)</label>\n            <input\n              type=\"number\"\n              name=\"age\"\n              value={formData.age}\n              onChange={handleInputChange}\n              placeholder=\"Enter age\"\n              className={styles.input}\n            />\n          </div>\n          <div className={styles.formGroup}>\n            <label>Weight (kg)</label>\n            <input\n              type=\"number\"\n              name=\"weight\"\n              value={formData.weight}\n              onChange={handleInputChange}\n              placeholder=\"Enter weight\"\n              className={styles.input}\n            />\n          </div>\n          <div className={styles.formGroup}>\n            <label>Blood Pressure (mmHg)</label>\n            <input\n              type=\"text\"\n              name=\"bp\"\n              value={formData.bp}\n              onChange={handleInputChange}\n              placeholder=\"E.g., 120/80\"\n              className={styles.input}\n            />\n          </div>\n          <div className={styles.formGroup}>\n            <label>Blood Sugar (mg/dL)</label>\n            <input\n              type=\"number\"\n              name=\"sugar\"\n              value={formData.sugar}\n              onChange={handleInputChange}\n              placeholder=\"Enter blood sugar\"\n              className={styles.input}\n            />\n          </div>\n        </div>\n        <button onClick={handlePredict} className={styles.primaryButton} disabled={loading}>\n          {loading ? 'Analyzing...' : 'Predict Risk'}\n        </button>\n      </div>\n\n      {risk && (\n        <div className={styles.riskResult}>\n          <h3>📊 Risk Assessment</h3>\n          <div className={styles.riskGrid}>\n            <div className={styles.riskCard} style={{ borderLeftColor: getRiskColor(risk.diabetesRisk) }}>\n              <h4>Diabetes Risk</h4>\n              <div className={styles.riskBadge} style={{ background: getRiskColor(risk.diabetesRisk) }}>\n                {risk.diabetesRisk}\n              </div>\n            </div>\n            <div className={styles.riskCard} style={{ borderLeftColor: getRiskColor(risk.heartDiseaseRisk) }}>\n              <h4>Heart Disease Risk</h4>\n              <div className={styles.riskBadge} style={{ background: getRiskColor(risk.heartDiseaseRisk) }}>\n                {risk.heartDiseaseRisk}\n              </div>\n            </div>\n            <div className={styles.riskCard} style={{ borderLeftColor: getRiskColor(risk.overallRisk) }}>\n              <h4>Overall Health Risk</h4>\n              <div className={styles.riskBadge} style={{ background: getRiskColor(risk.overallRisk) }}>\n                {risk.overallRisk}\n              </div>\n            </div>\n          </div>\n\n          <div className={styles.recommendationBox}>\n            <h4>💡 Recommendations</h4>\n            <ul>\n              {risk.recommendations.map((rec, idx) => (\n                <li key={idx}>{rec}</li>\n              ))}\n            </ul>\n          </div>\n        </div>\n      )}\n    </div>\n  );\n};\n\nexport default HealthRiskPrediction;\n

@@ -8,7 +8,11 @@ import DoctorRecommendation from './components/DoctorRecommendation';
 import RiskPrediction from './components/RiskPrediction';
 import EmergencyAssistant from './components/EmergencyAssistant';
 import Booking from './components/Booking';
+<<<<<<< Updated upstream
 import MedicineReminders from './components/MedicineReminders';
+=======
+import Dashboard from './components/dashboard/Dashboard';
+>>>>>>> Stashed changes
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import ChatbotButton from './components/ChatbotButton';
@@ -27,7 +31,11 @@ function App() {
       <RiskPrediction />
       <EmergencyAssistant />
       <Booking />
+<<<<<<< Updated upstream
       <MedicineReminders />
+=======
+      <Dashboard />
+>>>>>>> Stashed changes
       <Footer />
       <ChatbotButton onClick={() => setIsChatbotOpen(true)} />
       <Chatbot isOpen={isChatbotOpen} onClose={() => setIsChatbotOpen(false)} />
